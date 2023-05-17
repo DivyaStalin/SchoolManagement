@@ -29,6 +29,13 @@ app.get('/teacher',(req,res)=>{
     res.render('register.ejs');
 });
 
+app.get('/studentregistration',(req,res)=>{
+    res.render('studentregistration.ejs');
+});
+app.get('/search',(req,res)=>{
+    res.render('search.ejs');
+});
+
 
 
 
@@ -36,6 +43,7 @@ const env = require("dotenv").config();
 app.use(express.json());
 const userroute = require("./routes/userroute");
 const teacherroute = require("./routes/teacherroute");
+const studentroute = require("./routes/studentroute")
 
 const port = 4000;
 const uri = process.env.db_url;
@@ -53,7 +61,7 @@ mongoose.connect(
 
 app.use("/user",userroute);
 app.use("/teacher",teacherroute);
-
+app.use("/student",studentroute);
 
 
 

@@ -20,6 +20,31 @@ const userSchema = new Schema({
         type:String,
         required:true
     },
+    
+    cpassword:{
+        type:String,
+        required:true
+    },
+    dob:{
+        type:String,
+        required:true
+    },
+    mobileNo:{
+        type:String,
+        required:true
+    },
+    gender:{
+        type:String,
+        required:true
+    },
+    country:{
+        type:String,
+        required:true
+    },
+    state:{
+        type:String,
+        required:true
+    },
     loginStatus:{
         type:String,
         required:false,

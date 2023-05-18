@@ -1,10 +1,7 @@
 const studentSchema = require("../models/studentmodel");
 const { Router } = require('express');
-
+const express = require('express');
 const sturouter = require('express').Router();
-
-
-
 
 sturouter.post("/studentregister",async (req,res)=>{
     try{
@@ -46,30 +43,31 @@ sturouter.post("/studentregister",async (req,res)=>{
     }
 });
 sturouter.get('/getallstudent', async(req,res)=>{
-    const allstudent = await studentSchema.find().exec();
-
-    if(allstudent){
-        res.status(200)
-        .json({status:true,message:'success',result:allstudent});   
-    }
-    else{
-        res.status(400)
-        .json({status:false,message:'failed'});
-    }
+    try{
+        const allstu = await studentSchema.find().exec()
+        
+            res.send({result:allstu})
+            console.log(allstu);
+        }
+        catch(err){
+            console.log(err);
+        }
 });
 
 sturouter.get('/searchByName', async(req,res)=>{
     try{
-        let keyword = req.query.Name;
-        let data = await studentSchema.find({
-            "$or":[{Name:{$regex:req.query.keyword}}]
-        }).exec();
-        if(data)
-             res.status(200).json({status:true,message:'success',result:data});
-        }catch(err){
-        res.status(400).json({status:false,message:err.message});
-      console.log(err.message);
-    }  
+        let queryObj={...req.query};
+        let queryStr = JSON.stringify(queryObj);
+        queryStr = queryStr.replace((match)=>`$${match}`);
+        let result = await studentSchema.find(JSON.parse(queryStr));
+        res.status(200).json({
+            status:true,
+            message:"success",
+            result:result
+        });
+    }catch(err){
+      console.log("err");
+    }
 }); 
 sturouter.get('/searchByStandard', async(req,res)=>{
     try{

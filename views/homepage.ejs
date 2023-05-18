@@ -92,16 +92,18 @@
             <h1 style="font-size: 100px;text-shadow: 3px 4px 3px red;">Welcome to our School</h1></div>
         </div>
     <div class="col-4">   
-<form action="/user/register" method="post" >
+<form action="/user/login" method="post" >
     <i class="fas fa-user"></i>
-    <h3>SignUp</h3>
-<input type="text" class="form-control" placeholder="Username" name="userName"/><br/>
+    <h3>LogIn</h3>
+
 <input type="email" class="form-control" placeholder="Enter email" name="email"/><br/>
 <input type="password" class="form-control" placeholder="Enter password" name="password"/><br/>
-<input class="form-control bg-success" type="submit"/>
+<div class="text-center mt-3">
+    <button type="submit" class="btn btn-primary btn-rounded w-75">Login</button>
+</div>
 <b><hr/>
     <i class="fa-brands fa-facebook"></i><i class="fa-brands fa-google"></i><i class="fa-brands fa-twitter"></i><br/><br/>
-Already a user? Click <a href="/login"><i>Login</i></a></b>
+If new user? Click <a href="/login"><i>Login</i></a></b>
 </form>
     
 </div>      

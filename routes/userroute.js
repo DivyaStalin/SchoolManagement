@@ -14,6 +14,13 @@ route.post("/register",async (req,res)=>{
      let userName = req.body.userName;
      let email = req.body.email;
      let password = req.body.password;
+     let cpassword = req.body.cpassword;
+     let dob = req.body.dob;
+     let mobileNo = req.body.mobileNo;
+     let gender = req.body.gender;
+     let country = req.body.country;
+     let state = req.body.state;
+     
      let role = req.body.role;
      let port = 4000;
 
@@ -105,7 +112,7 @@ route.post('/login',async(req,res)=>{
                 res.render("home",{success:"LogIn Successfully "});
             }
             else{
-                res.render("login",{success:"password doesnot match"});
+                res.render("home",{success:"password doesnot match"});
                 
             }
         }

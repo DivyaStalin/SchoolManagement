@@ -32,9 +32,10 @@ app.get('/teacher',(req,res)=>{
 app.get('/studentregistration',(req,res)=>{
     res.render('studentregistration.ejs');
 });
+
 app.get('/search',(req,res)=>{
-    res.render('search.ejs');
-});
+    res.render('search.ejs',{result:""});
+})
 
 
 

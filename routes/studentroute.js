@@ -9,12 +9,12 @@ sturouter.post("/studentregister",async (req,res)=>{
 
     let stuInfo = {
         stuID : req.body.stuID,
-         Name : req.query.Name,
+         Name : req.body.Name,
          fatherName : req.body.fatherName,
          motherName:req.body.motherName,
          mobileNo: req.body.mobileNo,
          aadharNo: req.body.aadharNo,
-         standard : req.query.standard,
+         standard : req.body.standard,
          address : req.body.address,
          gender : req.body.gender
     }
@@ -42,13 +42,20 @@ sturouter.post("/studentregister",async (req,res)=>{
         console.log("Error",err);
     }
 });
+
 sturouter.get('/getallstudent', async(req,res)=>{
     try{
-        const allstu = await studentSchema.find().exec()
-        
-            res.send({result:allstu})
-            console.log(allstu);
-        }
+        let result = await studentSchema.find({
+            $or:[
+                {
+                standard:{$regex:`^${req.query.standard}`,$options:'i'},
+                Name:{$regex:`^${req.query.Name}`,$options:'i'}
+            }
+            ]
+            })
+        res.render("search",{result});
+        console.log(result);
+    }
         catch(err){
             console.log(err);
         }
@@ -56,10 +63,7 @@ sturouter.get('/getallstudent', async(req,res)=>{
 
 sturouter.get('/searchByName', async(req,res)=>{
     try{
-        let queryObj={...req.query};
-        let queryStr = JSON.stringify(queryObj);
-        queryStr = queryStr.replace((match)=>`$${match}`);
-        let result = await studentSchema.find(JSON.parse(queryStr));
+        let result = await studentSchema.find({Name:{$regex:`^${req.query.Name}`,$options:'i'}})
         res.status(200).json({
             status:true,
             message:"success",
@@ -71,12 +75,17 @@ sturouter.get('/searchByName', async(req,res)=>{
 }); 
 sturouter.get('/searchByStandard', async(req,res)=>{
     try{
-        let keyword = req.query.standard;
-        let data = await studentSchema.find({
-            "$or":[{standard:{$regex:req.query.keyword}}]
-        }).exec();
-        if(data)
-             res.status(200).json({status:true,message:'success',result:data});
+        let result = await studentSchema.find({$or:[{
+            standard:{$regex:`^${req.query.standard}`,$options:'i'},
+            Name:{$regex:`^${req.query.Name}`,$options:'i'}
+
+        }]
+    })
+        res.status(200).json({
+            status:true,
+            message:"success",
+            result:result
+        });
         }catch(err){
         res.status(400).json({status:false,message:err.message});
       console.log(err.message);

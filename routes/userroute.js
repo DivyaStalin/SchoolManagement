@@ -1,4 +1,5 @@
 const UserSchema = require("../models/usermodel");
+const timeTableSchema = require("../models/timeTablemodel")
 const { Router } = require('express');
 const bcrypt = require('bcrypt');
 const route = require('express').Router();
@@ -123,6 +124,113 @@ route.post('/login',async(req,res)=>{
         res.render("login",{success:"Enter Email Id"});
     }
 });
+route.post("/resetlink",async(req,res)=>{
+    try{
+        let email = req.body.email;
+        let user = await UserSchema.findOne({email:email}).exec();
+        if(user){
+            console.log("valid");
+            let port = 4000;
+            const mailData = {
+               to:email,
+               subject:"Reset Password Link",
+               text:"Hello",
+               fileName:"resetpwdlink.ejs",
+               details:{
+                   Name:"Divy",
+                   date:new Date(),
+                   link:`http://localhost:${port}/resetpwd`,
+               },
+           };
+       
+           let mailresult = mailsending(mailData);
+           if(!mailresult){
+               console.log("mail not sending");
+           }else{
+               console.log("email sent");
+           }    
+        }
+    }
+        catch(err){
+               console.log("Error",err);
+           }
+       });
+       
+       route.post('/resetpwd',async(req,res)=>{
+        let email=req.body.email;
+        let resetPassword=req.body.password;
+        let user = await UserSchema.findOne({email:email}).exec();
+        try{
+        if(user){
+            let updatePassword = await UserSchema.findOneAndUpdate({password:resetPassword}).exec();
+            res.status(200)
+        .json({
+            status:true,
+            message:"successfully updated",
+            result: updatePassword,
+        });
+    }
+        else {
+            res.status(400)
+        .json({
+            status:false,
+            message:"Invalid data",
+        
+        });
+    
+        }
+        
+    }catch(err){
+        res.status(400).json({status:"false",message:err.message});
+    }
+    });
 
+    route.post('/timeTable',async(req,res)=>{
+        let subject1 = req.body.subject1;
+        let subject2 = req.body.subject2;
+        let subject3 = req.body.subject3;
+        let subject4 = req.body.subject4;
+        let subject5 = req.body.subject5;
+        let subject6 = req.body.subject6;
+        let subject7 = req.body.subject7;
+        let subject8 = req.body.subject8;
+        let subject9 = req.body.subject9;
+        let standard = req.body.standard;
+        let classTeacher = req.body.classTeacher;
+
+       const timeTable = new timeTableSchema(req.body);
+       const result = await timeTable.save();
+       if(result){
+        res.status(200)
+        .json({
+            status:true,
+            message:"success",
+            result:result
+        })
+
+       }else{
+        res.status(400)
+        .json({
+            status:false,
+            message:"failed"
+        })
+       }
+
+    });
+    route.get('/timeTable',async(req,res)=>{
+        let standard = req.query.standard;
+        const result = await timeTableSchema.findOne({standard:standard}).exec();
+        if(result){
+            res.render("timetable",{result});
+        }else{
+            res.status(400)
+            .json({
+                status:false,
+                message:"failed",
+                
+            });
+        }
+    });
+    
 
 module.exports=route;

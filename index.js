@@ -34,8 +34,21 @@ app.get('/studentregistration',(req,res)=>{
 });
 
 app.get('/search',(req,res)=>{
-    res.render('search.ejs',{result:""});
+    res.render('search.ejs',{result});
 })
+
+app.get('/timetable',(req,res)=>{
+    res.render('timetable.ejs',{result});
+})
+
+app.get('/forgetpwdlink',(req,res)=>{
+    res.render('forgetpwdlink.ejs');
+})
+
+app.get('/resetpwd',(req,res)=>{
+    res.render('resetpwd.ejs');
+})
+
 
 
 

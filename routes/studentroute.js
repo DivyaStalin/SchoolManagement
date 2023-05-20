@@ -45,14 +45,7 @@ sturouter.post("/studentregister",async (req,res)=>{
 
 sturouter.get('/getallstudent', async(req,res)=>{
     try{
-        let result = await studentSchema.find({
-            $or:[
-                {
-                standard:{$regex:`^${req.query.standard}`,$options:'i'},
-                Name:{$regex:`^${req.query.Name}`,$options:'i'}
-            }
-            ]
-            })
+        let result = await studentSchema.find().exec();
         res.render("search",{result});
         console.log(result);
     }
@@ -64,11 +57,7 @@ sturouter.get('/getallstudent', async(req,res)=>{
 sturouter.get('/searchByName', async(req,res)=>{
     try{
         let result = await studentSchema.find({Name:{$regex:`^${req.query.Name}`,$options:'i'}})
-        res.status(200).json({
-            status:true,
-            message:"success",
-            result:result
-        });
+        res.render("search",{result});
     }catch(err){
       console.log("err");
     }
@@ -77,15 +66,9 @@ sturouter.get('/searchByStandard', async(req,res)=>{
     try{
         let result = await studentSchema.find({$or:[{
             standard:{$regex:`^${req.query.standard}`,$options:'i'},
-            Name:{$regex:`^${req.query.Name}`,$options:'i'}
-
-        }]
-    })
-        res.status(200).json({
-            status:true,
-            message:"success",
-            result:result
-        });
+            }]
+    });
+    res.render("search",{result});
         }catch(err){
         res.status(400).json({status:false,message:err.message});
       console.log(err.message);

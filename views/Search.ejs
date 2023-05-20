@@ -14,20 +14,22 @@
     <div class="container mt-5"> 
       <h1>Student Detais
   </h1>
-  <div class="row">
-    <div class="col-4">
       <div class="input-group rounded ">
         <form action="/student/searchByName" method="get">
-        <input type="text" class="form-control rounded " name="Name" onkeyup="this.value" />
-        <button class="btn btn-info" type="submit">
-          <i class="fas fa-search"></i>
-        </button>
+        <input type="text" name="Name" class="form-control"id="searchData" placeholder="searchByName" onkeypress="sendData(this)" />
+        </div>
+        
         </form>
+        <div class="input-group rounded ">
+           <form action="/student/searchByStandard" method="get">
+          <input type="text" class="form-control rounded " name="standard" id="searchData" placeholder="searchByStandard" onkeyup="sendData(this)" />
+        </form>
+        
       </div>
-    </div>
-  </div>
+    
   <br>
-  <br>
+  
+    <br>
     <table class="table table-bordered">
         <thead class="table-dark">
           <tr>
@@ -63,6 +65,31 @@
           
           </tbody>
       </table>
-    </div>  
+    </div> 
+    <script>
+      function sendData(e){
+        const searchResults = document.getElementById('searchData');
+        console.log(searchResults);
+        fetch('http://localhost:4000/student/getstudent',{
+          method:'post',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({payload:e.value})
+        }).then(res.json()).then(data=>{
+          let payload = data.payload;
+          searchResults.innerHTML='';
+          if(payload.length<1){
+          searchResults.innerHTML='<p>Sorry Nothing found</p>';
+          return;
+          }
+          payload.forEach((item,index) => {
+             if(index>0){
+              searchResults.innerHTML += '<hr>';
+              searchResults.innerHTML +=`${item.name}`;
+        }
+      });
+      return;
+        });
+      }
+    </script> 
 </body>
 </html>

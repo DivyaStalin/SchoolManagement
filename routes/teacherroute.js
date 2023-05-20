@@ -39,5 +39,32 @@ router.post("/teacherregister",async (req,res)=>{
         console.log("Error",err);
     }
 });
+router.get('/searchTeacher', async(req,res)=>{
+    try{
+        let result = await teacherSchema.find({firstName:{$regex:`^${req.query.firstName}`,$options:'i'}})
+        res.render("searchTeacher",{result});
+    }catch(err){
+      console.log("err");
+    }
+});
+router.delete("/deleteTeacher",async (req,res)=>{
+    let firstName = req.query.firstName;
+    
+    const User = await teacherSchema.findOne({firstName:firstName}).exec();
+    
+    if(User){
+        const deleteuser = await teacherSchema.deleteOne({firstName:firstName}).exec();
+
+        res.status(200).json({
+            status:true,
+            message:"deleted successfully",
+        });
+    }else{
+        res.status(400)
+        .json({status:false,
+        message:"No user found",
+    });
+    }
+});
 
 module.exports = router;

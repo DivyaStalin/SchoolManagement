@@ -118,10 +118,10 @@ route.post('/login',async(req,res)=>{
             }
         }
         else{
-            res.render("login",{success:"Usernot found"});}
+            res.render("homepage",{success:"Usernot found"});}
     }
     else{
-        res.render("login",{success:"Enter Email Id"});
+        res.render("homepage",{success:"Enter Email Id"});
     }
 });
 route.post("/resetlink",async(req,res)=>{
@@ -163,13 +163,8 @@ route.post("/resetlink",async(req,res)=>{
         try{
         if(user){
             let updatePassword = await UserSchema.findOneAndUpdate({password:resetPassword}).exec();
-            res.status(200)
-        .json({
-            status:true,
-            message:"successfully updated",
-            result: updatePassword,
-        });
-    }
+            res.render("resetpwd",{success:`Hello !!${user.userName}  Your new Password is successfully updated`});
+        }
         else {
             res.status(400)
         .json({

@@ -14,9 +14,6 @@
 </head>
 <style>
     body{
-        display: flex;
-        align-items: center;
-        justify-content: center;
         margin-top: 40px;
     }
     .form-control{
@@ -31,7 +28,12 @@
     }
 </style>
 <body>
-    
+    <div class="alert alert-success">
+         <%=success%>
+      </div>
+      
+    <br>
+    <div class="row">
     <div class="container col-6">
         <h3>Reset Your Password : <i class="fa-light fa-hand-back-point-down"></i></h3>
         <form action="/user/resetpwd" method="post">
@@ -40,6 +42,7 @@
             
             <center><input type = "submit" class="form-control bg-primary" style="width:150px"value="submit"/></center>
         </form>
+    </div>
     </div>
 </body>
 </html>

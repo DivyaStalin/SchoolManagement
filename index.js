@@ -46,7 +46,11 @@ app.get('/forgetpwdlink',(req,res)=>{
 })
 
 app.get('/resetpwd',(req,res)=>{
-    res.render('resetpwd.ejs');
+    res.render('resetpwd.ejs',{success:''});
+})
+
+app.get('/searchTeacher',(req,res)=>{
+    res.render('searchTeacher.ejs',{result});
 })
 
 

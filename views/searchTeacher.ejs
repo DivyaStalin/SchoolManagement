@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container mt-5"> 
-      <h1>Student Detais
+      <h1>Teacher Details
   </h1>
       <div class="input-group rounded ">
         <form action="/teacher/searchTeacher" method="get">
@@ -57,8 +57,18 @@
                 <td><%= e.qualification %></td>
                 <td><%= e.subject %></td>
                 <td><%= e.salary %></td>
-                <td><button  class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span></button></td>
-                <td><button  class="btn btn-danger"><a href="http://localhost:4000/teacher/deleteTeacher?firstName="><span class="glyphicon glyphicon-trash"></span></i></a></button></td>
+                <td>
+                  <button  class="btn btn-success">
+                  <a href = "/teacher/editTeacher?empID=<%=e.empID%>"><span class="glyphicon glyphicon-pencil"></span></a>
+                </button>
+              </td>
+                <td>
+                  <button  class="btn btn-danger">
+                    <a href = "/teacher/deleteTeacher?firstName=<%=e.firstName%>">
+                  <span class="glyphicon glyphicon-trash"></span></a>
+                  
+                </button>
+              </td>
 
               </tr>
             <% }) %>

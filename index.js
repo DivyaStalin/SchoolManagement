@@ -53,6 +53,12 @@ app.get('/searchTeacher',(req,res)=>{
     res.render('searchTeacher.ejs',{result});
 })
 
+app.get('/editTeacher',(req,res)=>{
+    res.render('editTeacher.ejs',{result});
+})
+app.get('/deleteTeacher',(req,res)=>{
+    res.render('deleteTeacher.ejs');
+})
 
 
 

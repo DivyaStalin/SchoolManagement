@@ -47,6 +47,41 @@ router.get('/searchTeacher', async(req,res)=>{
       console.log("err");
     }
 });
+router.get('/searchTea', async(req,res)=>{
+    try{
+        let result = await teacherSchema.find().exec();
+        res.render("searchTeacher",{result});
+        console.log(result);
+    }
+        catch(err){
+            console.log(err);
+        }
+});
+router.get('/editTeacher',async(req,res)=>{
+    try{
+    console.log(req.query._id);
+    const result = await teacherSchema.findOneAndUpdate({empID:req.query.empID},req.body,{new:true});
+        
+        if (result){
+            
+            res.render("editTeacher",{result});
+            console.log(result);
+        
+        }else{
+            res.status(400).json({
+                status:false,
+                message:'failed'
+            });
+        }
+
+    }
+    catch(err){
+          console.log(err);
+    }
+
+});
+
+        
 router.delete("/deleteTeacher",async (req,res)=>{
     let firstName = req.query.firstName;
     
@@ -55,10 +90,7 @@ router.delete("/deleteTeacher",async (req,res)=>{
     if(User){
         const deleteuser = await teacherSchema.deleteOne({firstName:firstName}).exec();
 
-        res.status(200).json({
-            status:true,
-            message:"deleted successfully",
-        });
+        res.render('deleteTeacher')
     }else{
         res.status(400)
         .json({status:false,

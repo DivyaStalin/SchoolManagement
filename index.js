@@ -56,8 +56,19 @@ app.get('/searchTeacher',(req,res)=>{
 app.get('/editTeacher',(req,res)=>{
     res.render('editTeacher.ejs',{result});
 })
-app.get('/deleteTeacher',(req,res)=>{
-    res.render('deleteTeacher.ejs');
+
+app.get('/ediStudent',(req,res)=>{
+    res.render('editStudent.ejs',{result});
+})
+
+app.get('/message',(req,res)=>{
+    res.render('message.ejs',{success});
+})
+app.get('/checkStudentTotal',(req,res)=>{
+    res.render('checkStudentTotal.ejs');
+})
+app.get('/announcement',(req,res)=>{
+    res.render('announcement.ejs',{result});
 })
 
 

@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student registration</title>
+    <title>Teacher registration</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -23,38 +22,38 @@
 </style>
 </head>
 <body style = "text-align: center;background-color: grey;">
-    <h1>Student registration</h1>
-    <form action="/student/studentregister" method="post">
+    <h1>Edit Student details</h1>
+    <form action="/student/editStudent?stuID=<%-result.stuID%>" method="post">
         <div class="container">
         <div class="row">
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter Stu Id" name="stuID"/>
+                <input type="text" class="form-control" placeholder="Enter Stu Id" name="stuID" value="<%=result.stuID%>"/>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter Name" name="Name"/>
+                <input type="text" class="form-control" placeholder="Enter Name" name="Name" value="<%=result.Name%>"/>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter Fathername" name="fatherName"/>
+                <input type="text" class="form-control" placeholder="Enter Fathername" name="fatherName"  value="<%=result.fatherName%>"/>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter motherName" name="motherName"/>
+                <input type="text" class="form-control" placeholder="Enter motherName" name="motherName" value="<%=result.motherName%>"/>
             </div>
             <div class="col-4" >
-                <input type="text" class="form-control" placeholder="Enter Gender" name="gender"/>
+                <input type="text" class="form-control" placeholder="Enter Gender" name="gender" value="<%=result.gender%>"/>
             </div>
             
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter MobileNo" name="mobileNo"/>
+                <input type="text" class="form-control" placeholder="Enter MobileNo" name="mobileNo" value="<%=result.mobileNo%>"/>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter AadharNo" name="aadharNo"/>
+                <input type="text" class="form-control" placeholder="Enter AadharNo" name="aadharNo" value="<%=result.aadharNo%>"/>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter Address" name="address"/>
+                <input type="text" class="form-control" placeholder="Enter Address" name="address" value="<%=result.address%>"/>
             </div>
             
              <div class="col-4" >
-                <input type="text" class="form-control" placeholder="Enter Standard" name="standard"/>
+                <input type="text" class="form-control" placeholder="Enter Standard" name="standard" value="<%=result.standard%>"/>
             </div>
             <center>
             <div class="col-4">

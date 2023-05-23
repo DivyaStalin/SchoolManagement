@@ -179,7 +179,7 @@ route.post("/resetlink",async(req,res)=>{
         res.status(400).json({status:"false",message:err.message});
     }
     });
-
+    
     route.post('/timeTable',async(req,res)=>{
         let subject1 = req.body.subject1;
         let subject2 = req.body.subject2;

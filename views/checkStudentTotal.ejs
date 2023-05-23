@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Class strength</title>
+    <style>
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20%;
+        }
+        form{
+            border: 5px solid red;
+            padding: 30px;
+            align-items: center;
+            font-size: 30px;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        input{
+            border-radius: 2px;
+            padding: 5px;
+            border: none;
+            border-bottom: 3px solid black;
+            background-color: aquamarine;
+            font-size: 20px;
+            font-style: italic;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body style="background-color: rgb(201, 162, 162);">
+    <div>
+
+        <form action="/student/check" method="get">
+            Standard::<input type="text" name="standard" placeholder="Enter standard" onkeyup="this.value"><br><br>
+        <center><input type="submit" style="background-color: whitesmoke;"></center>
+    
+        </form>
+
+    </div>
+    
+</body>
+</html>

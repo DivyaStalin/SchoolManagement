@@ -1,6 +1,6 @@
 const teacherSchema = require("../models/teachermodel");
 const { Router } = require('express');
-
+const { mailsending } = require('../middleware/mailer');
 const router = require('express').Router();
 
 
@@ -23,11 +23,7 @@ router.post("/teacherregister",async (req,res)=>{
         
         const result = await teacher.save();
         if(result){
-          return res.status(200)
-          .json({
-            status:true,
-            message:'success',
-            result:result});
+          res.render("message",{success:`Success!!! ${req.body.firstName} your details are registered`})
         }
          else {
             return res.status(400)
@@ -51,12 +47,46 @@ router.get('/searchTea', async(req,res)=>{
     try{
         let result = await teacherSchema.find().exec();
         res.render("searchTeacher",{result});
-        console.log(result);
+        
     }
         catch(err){
             console.log(err);
         }
 });
+router.post("/all",async(req,res)=>{
+    try{
+        
+        let user = await teacherSchema.find().exec();
+        if(user){
+            console.log("valid");
+            let port = 4000;
+            const mailData = {
+               to:user.email,
+               subject:"Reset Password Link",
+               text:"Hello",
+               fileName:"resetpwdlink.ejs",
+               details:{
+                   Name:"Divy",
+                   date:new Date(),
+                   link:`http://localhost:${port}/resetpwd`,
+               },
+           };
+       
+           let mailresult = mailsending(mailData);
+           if(!mailresult){
+               console.log("mail not sending");
+           }else{
+               console.log("email sent");
+           }    
+        }
+    }
+        catch(err){
+               console.log("Error",err);
+           }
+       });
+       
+
+
 router.get('/editTeacher',async(req,res)=>{
     try{
     console.log(req.query._id);
@@ -65,7 +95,7 @@ router.get('/editTeacher',async(req,res)=>{
         if (result){
             
             res.render("editTeacher",{result});
-            console.log(result);
+            
         
         }else{
             res.status(400).json({
@@ -81,16 +111,37 @@ router.get('/editTeacher',async(req,res)=>{
 
 });
 
+router.post('/editTeacher',async(req,res)=>{
+    try{
+        let empID = req.query.empID;
+        const result = await teacherSchema.findOneAndUpdate({empID:empID},req.body);
         
-router.delete("/deleteTeacher",async (req,res)=>{
-    let firstName = req.query.firstName;
+        if (result){
+            
+            res.render("message",{success:`${empID} updated successfully`});
+            console.log("updated successfully");
+        
+        }else{
+            res.status(400).json({
+                status:false,
+                message:'fail'
+            });
+        }
+
+    }catch(err){
+          console.log(err);
+    }
+
+})
+
+        
+router.get("/deleteTeacher/:firstName",async (req,res)=>{
     
-    const User = await teacherSchema.findOne({firstName:firstName}).exec();
+    
+    const User = await teacherSchema.findOneAndDelete({firstName:req.params.firstName}).exec();
     
     if(User){
-        const deleteuser = await teacherSchema.deleteOne({firstName:firstName}).exec();
-
-        res.render('deleteTeacher')
+        res.render("message",{success:`${req.params.firstName} deleted successfully`});
     }else{
         res.status(400)
         .json({status:false,
@@ -98,5 +149,15 @@ router.delete("/deleteTeacher",async (req,res)=>{
     });
     }
 });
-
+router.get('/announcement',async(req,res)=>{
+    try{
+        let result = await teacherSchema.find().exec();
+        res.render("announcement",{result});
+        
+        
+    }
+        catch(err){
+            console.log(err);
+        }
+});
 module.exports = router;

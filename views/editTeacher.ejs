@@ -22,8 +22,8 @@
 </style>
 </head>
 <body style="background-color: grey;">
-    <center><h1>Update Teacher Details </h1></center>
-    <form action="/teacher/editTeacher" method="get">
+    <center><h1>Edit Teacher Details </h1></center>
+    <form action="/teacher/editTeacher?empID=<%-result.empID%>" method="post">
         <div class="container">
         <div class="row">
             <div class="col-4">
@@ -55,7 +55,7 @@
             </div>
             <center>
             <div class="col-4">
-          <input type="submit" class="form-control bg-success" value="Update" />
+          <input type="submit" class="form-control bg-success" />
         </div>
     </center>
 

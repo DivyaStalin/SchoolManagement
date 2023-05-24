@@ -71,11 +71,17 @@ app.get('/announcement',(req,res)=>{
     res.render('announcement.ejs',{result});
 })
 
+app.get('/mail-form',(req,res)=>{
+    res.render('mail-form.ejs',{title:"",result});
+});
+
 
 
 
 const env = require("dotenv").config();
 app.use(express.json());
+
+
 const userroute = require("./routes/userroute");
 const teacherroute = require("./routes/teacherroute");
 const studentroute = require("./routes/studentroute")
@@ -93,6 +99,8 @@ mongoose.connect(
 .catch((err)=>{
     console.log("DB error",err);
 });
+
+
 
 app.use("/user",userroute);
 app.use("/teacher",teacherroute);

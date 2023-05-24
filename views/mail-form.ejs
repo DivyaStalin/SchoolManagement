@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= title %></title>
+<style>
+ body {
+    margin:0%;
+    padding: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+* {
+
+  box-sizing: border-box;}
+.user-detail {
+    height: 100vh;
+    border: 2px solid #f1f1f1;
+    padding: 16px;
+    background-color: white;
+    width: 30%;}
+input, textarea{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;}
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;}
+button[type=submit] {
+    background-color: #434140;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-size: 20px;}
+label{
+  font-size: 18px;;}
+button[type=submit]:hover {
+  background-color:#3d3c3c;}
+</style>
+</head>
+<body>
+
+
+<div class="user-detail">
+    
+    
+    <hr>
+    <form action="/teacher/send-email" method="POST">
+      <h2>Send Announcement to Teachers</h2>
+      <hr>
+      <label>To</label>
+        <%if(result.length > 0) { %>
+            <% result.forEach(function(e)  {%>
+          
+          
+          <input type="text" placeholder="Receiver Email" name="to" value="<%=e.email%>" required >
+          <% }) %>
+
+          <% } %> 
+
+          <label>Subject</label>
+          <input type="text" placeholder="Subject" name="subject" required >
+          
+    
+          <label>Message</label>
+          <textarea placeholder="Enter Full Country" name="message" required >
+            </textarea>
+            
+
+          <button type="submit">Send and Email</button>
+        </div>
+</div>
+<!--====form section start====-->
+</body>
+</html>

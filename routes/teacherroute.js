@@ -2,7 +2,57 @@ const teacherSchema = require("../models/teachermodel");
 const { Router } = require('express');
 const { mailsending } = require('../middleware/mailer');
 const router = require('express').Router();
+const nodemailer = require('nodemailer');
 
+router.get('/send-mail', async(req, res) =>{
+    const result = await teacherSchema.find().exec();
+      if(result)
+          res.render('mail-form', { title: 'Send Mail with nodejs' , result});
+  });
+  
+  // This route will work after submit the form
+  router.post('/send-email', async(req, res)=>{
+     try{
+      const result = await teacherSchema.find().exec();
+      if(result){
+          var receiver = req.body.to;
+      var subject = req.body.subject;
+      var message = req.body.message;
+      
+      var transporter = nodemailer.createTransport({
+          service:"gmail",
+          host:"smtp.gmail.com",
+          port: 587,
+          secure:false,
+          auth:{
+              user:"divyachinnu.j1988@gmail.com",
+              pass:"nhtlbvntzdkzzbde"
+          }
+      });
+            
+        
+        var mailOptions = {
+          from: 'divyachinnu.j1988@gmail.com',
+          to: receiver,
+          subject: subject,
+          text: message
+        };
+        
+        transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email was sent successfully: ' + info.response);
+          }
+        });
+        res.render("message",{success:`Success!!! Announcement sent`})
+  
+      }
+  
+     }catch(err){
+      console.log(err);
+     }
+  });
 
 
 

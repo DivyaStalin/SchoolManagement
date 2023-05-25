@@ -38,11 +38,17 @@ const teacherSchema = new Schema({
     },
     subject:{
         type:String,
-        required:false  
+        required:true  
     },
     salary:{
         type:String,
-        required:false  
+        required:true 
+    },
+    status:{
+        type:String,
+        required:false,
+        enum:['active','inactive'],
+        default:'inactive'
     }
 },
     {

@@ -2,7 +2,44 @@ const teacherSchema = require("../models/teachermodel");
 const { Router } = require('express');
 const { mailsending } = require('../middleware/mailer');
 const router = require('express').Router();
+const {isAdmin} = require('../middleware/auth')
 const nodemailer = require('nodemailer');
+
+router.get('/availableTeacher',async(req,res)=>{
+    try{
+        let status = req.query.status;
+        let result = await teacherSchema.find({status:status}).exec();
+        if(result){
+            if(result.status != 'active'){
+                res.render("availableTeacher",{result});
+                console.log(result);
+            }else{
+                console.log("Availabe teachers");
+            }
+
+        }else{
+            console.log("Invalid input")
+        }
+    }catch(err){
+         console.log("Error",err);
+    }
+})
+
+router.get('/available',async(req,res)=>{
+    try{
+        let subject = req.body.subject;
+        let det = await teacherSchema.find({subject:subject}).exec();
+        if(det){
+            let sub = await teacherSchema.updateMany({subject:subject},{status:'active'},{new:true})
+            res.status(200).json({result:det});
+
+        }else{
+            console.log("Invalid input")
+        }
+    }catch(err){
+         console.log("Error",err);
+    }
+})
 
 router.get('/send-mail', async(req, res) =>{
     const result = await teacherSchema.find().exec();
@@ -56,9 +93,9 @@ router.get('/send-mail', async(req, res) =>{
 
 
 
-router.post("/teacherregister",async (req,res)=>{
+router.post("/teacherregister",isAdmin,async (req,res)=>{
     try{
-    console.log("user body",req.body);
+    
      let empID = req.body.empID;
      let firstName = req.body.firtName;
      let lastName = req.body.lastName;

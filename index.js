@@ -67,8 +67,12 @@ app.get('/message',(req,res)=>{
 app.get('/checkStudentTotal',(req,res)=>{
     res.render('checkStudentTotal.ejs');
 })
-app.get('/announcement',(req,res)=>{
-    res.render('announcement.ejs',{result});
+app.get('/attendance',(req,res)=>{
+    res.render('attendance.ejs',{result});
+})
+
+app.get('/availableTeacher',(req,res)=>{
+    res.render('availableTeacher.ejs',{result});
 })
 
 app.get('/mail-form',(req,res)=>{

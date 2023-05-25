@@ -113,15 +113,15 @@ route.post('/login',async(req,res)=>{
                 res.render("home",{success:"LogIn Successfully "});
             }
             else{
-                res.render("home",{success:"password doesnot match"});
+                res.render("message",{success:"password doesnot match"});
                 
             }
         }
         else{
-            res.render("homepage",{success:"Usernot found"});}
+            res.render("message",{success:"Usernot found"});}
     }
     else{
-        res.render("homepage",{success:"Enter Email Id"});
+        res.render("message",{success:"Enter Email Id"});
     }
 });
 route.post("/resetlink",async(req,res)=>{

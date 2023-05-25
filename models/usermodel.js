@@ -54,7 +54,7 @@ const userSchema = new Schema({
         type:String,
         enum:['user','admin'],
         required:true,
-        default:'user'
+        default:'admin'
     },
     verified:{
         type:String,

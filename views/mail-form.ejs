@@ -53,9 +53,11 @@ button[type=submit]:hover {
     
     
     <hr>
+    
     <form action="/teacher/send-email" method="POST">
       <h2>Send Announcement to Teachers</h2>
       <hr>
+
       <label>To</label>
         <%if(result.length > 0) { %>
             <% result.forEach(function(e)  {%>

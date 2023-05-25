@@ -146,7 +146,21 @@ sturouter.post('/editStudent',async(req,res)=>{
           console.log(err);
     }
 
-})
+});
+
+sturouter.get("/attendance",async(req,res)=>{
+    try{
+        let result = await studentSchema.find({$or:[{
+            standard:{$regex:`^${req.query.standard}`,$options:'i'},
+            }]
+    });
+        res.render("attendance",{result});
+        
+    }
+        catch(err){
+            console.log(err);
+        }
+});
 
 
 

@@ -5,12 +5,12 @@ const sturouter = require('express').Router();
 sturouter.get("/check",async(req,res)=>{
     try{
         let standard = req.query.standard;
-        let check = await studentSchema.find({standard:standard}).exec();
-        if(check.length>=10){
-            res.send(`<script>alert("Total no of students is ${check.length}..in class ${standard}...Only 10 students are allowed")</script>`);
+        let result = await studentSchema.find({standard:standard}).exec();
+        if(result.length>=10){
+            res.send(`<script>alert("Total no of students is ${result.length}..in class ${standard}...Only 10 students are allowed")</script>`);
             
         }else{
-            res.render("studentregistration");
+            res.render("studentregistration",{result});
         }
 
     }catch(err){
@@ -91,7 +91,7 @@ sturouter.get("/deleteStudent/:Name",async (req,res)=>{
     const User = await studentSchema.findOneAndDelete({Name:req.params.Name}).exec();
     
     if(User){
-        res.render("message",{success:`${req.params.Name} deleted successfully`});
+        res.render("message",{success:`Success!!! ${req.params.Name} deleted successfully`});
     }else{
         res.status(400)
         .json({status:false,
@@ -132,7 +132,7 @@ sturouter.post('/editStudent',async(req,res)=>{
         
         if (result){
             
-            res.render("message",{success:`${stuID} updated successfully`});
+            res.render("message",{success:`Success!!! ${stuID} updated successfully`});
             console.log("updated successfully");
         
         }else{

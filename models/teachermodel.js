@@ -49,6 +49,12 @@ const teacherSchema = new Schema({
         required:false,
         enum:['active','inactive'],
         default:'inactive'
+    },
+    onPeriod:{
+        type:String,
+        required:false,
+        enum:['on','off'],
+        default:'off'
     }
 },
     {

@@ -9,15 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<style>
-  a{
-            color:blue;
-            text-decoration: none;
-            
-        }
-</style>
 <body>
-  <h4 style="text-align: right;"><a href="http://localhost:4000/home">back</a></h4>
     <div class="container mt-5"> 
       <h1>Available Teachers 
   </h1>
@@ -29,25 +21,28 @@
     <table class="table table-bordered">
         <thead class="table-dark">
           <tr>
-            
+            <th scope="col">EMP ID</th>
             <th scope="col">First Name</th>
-            <th scope="col">Subject</th>
+            <th scope="col">Status</th>
             </tr>
         </thead>
         <tbody >
-          <%if(result.length > 0) { %>
-            <% result.forEach(function(e)  {%>
-              <tr>
-                
-                <td><%= e.firstName %></td>
-                <td><%= e.subject %></td>
-                </tr>
-            <% }) %>
-
-          <% } %> 
-
-          
-          </tbody>
+            <%if(result.length > 0) { %>
+                <% result.forEach(function(e)  {%>
+                  <tr>
+                    <td><%=e.empID%></td>
+                    <td><%= e.firstName %></td>
+                    <td><button  class="btn btn-success">
+                        <a href = "/teacher/present?empID=<%=e.empID%>">Present</a>
+                      </button>
+                      <button  class="btn btn-success">
+                        <a href = "/teacher/absent?empID=<%=e.empID%>">Leave</a>
+                      </button></td>
+                    </tr>
+                <% }) %>
+    
+              <% } %> 
+        </tbody>
       </table>
     </div> 
 </div> 

@@ -9,7 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/7feae977fb.js" crossorigin="anonymous"></script>
 <style>
     .form-control{
         padding: 4%;
@@ -19,6 +20,17 @@
         background-color: whitesmoke;
     
     }
+
+    span{
+        font-size: 20px;
+        color: red;
+        margin-left: 50px;
+        font-weight: bold;
+    }
+    .fas{
+        color: green;
+    }
+
     
 </style>
 </head>
@@ -28,42 +40,198 @@
         <div class="container">
         <div class="row">
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter Stu Id" name="stuID"/>
+                <input type="text" class="form-control" placeholder="Enter Stu Id" id="stuID" name="stuID" onkeyup="validateStuid()"/>
+                <span id="iderr"></span>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter Name" name="Name"/>
+                <input type="text" class="form-control" placeholder="Enter Name" id="Name" name="Name" onkeyup="validateName()" />
+                <span id="nameerr"></span>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter Fathername" name="fatherName"/>
+                <input type="text" class="form-control" placeholder="Enter Fathername" id="fatherName" name="fatherName" onkeyup="validateFName()"/>
+                <span id="fnameerr"></span>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter motherName" name="motherName"/>
+                <input type="text" class="form-control" placeholder="Enter motherName" id="motherName" name="motherName" onkeyup="validateMName()"/>
+                <span id="mnameerr"></span>
             </div>
             <div class="col-4" >
-                <input type="text" class="form-control" placeholder="Enter Gender" name="gender"/>
+                <input type="text" class="form-control" placeholder="Enter Gender" name="gender" id="gender" onkeyup="validateGender()"/>
+                <span id="gendererr"></span>
             </div>
             
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter MobileNo" name="mobileNo"/>
+                <input type="text" class="form-control" placeholder="Enter MobileNo" name="mobileNo" id="mobileNo" onkeyup="validateMobile()"/>
+                <span id="mobileNoerr"></span>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter AadharNo" name="aadharNo"/>
+                <input type="text" class="form-control" placeholder="Enter AadharNo" name="aadharNo" id="aadharNo" onkeyup="validateAadhar()"/>
+                <span id="aadharNoerr"></span>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Enter Address" name="address"/>
+                <input type="text" class="form-control" id="address" placeholder="Enter Address" name="address" onkeyup="validateAddress()"/>
+                <span id="addresserr"></span>
             </div>
             
              <div class="col-4" >
-                <input type="text" class="form-control" placeholder="Enter Standard" name="standard"/>
+                <input type="text" class="form-control" id="standard" placeholder="Enter Standard"  name="standard" onkeyup="validateStandard()"/>
+                <span id="standarderr"></span>
             </div>
             <center>
             <div class="col-4">
-          <input type="submit" class="form-control bg-success" value="Submit"/>
-        </div>
-    </center>
+                <input type="submit" class="form-control bg-success" id="submit" value="Submit" onclick="validateSubmit()"/>
+            </div>
+            </center>
 
         </div>
     </div>
     </form>
+    <script>
+        var iderr = document.getElementById("iderr");
+        var nameerr = document.getElementById("nameerr");
+        var fnameerr = document.getElementById("fnameerr");
+        var mnameerr = document.getElementById("mnameerr");
+        var mobileNoerr = document.getElementById("mobileNoerr");
+        var aadharNoerr = document.getElementById("aadharNoerr");
+        var gendererr = document.getElementById("gendererr");
+        var addresserr = document.getElementById("addresserr");
+        var standarderr = document.getElementById("standarderr");
+
+        function validateStuid(){
+            var stuID = document.getElementById("stuID").value;
+            if(stuID.length == 0 ){
+               iderr.innerHTML = "Enter empID";
+            return false;
+            }
+        iderr.innerHTML = '<i class="fas fa-check-circle"></i>';
+        return true;
+        }
+
+        function validateName(){
+            var Name = document.getElementById("Name").value;
+        if(Name.length == 0 ){
+            nameerr.innerHTML = "Enter empID";
+            return false;
+        }
+        nameerr.innerHTML = '<i class="fas fa-check-circle"></i>';
+        return true;
+        }
+        
+        function validateFName(){
+            var fatherName = document.getElementById("fatherName").value;
+        if(fatherName.length == 0 ){
+            fnameerr.innerHTML = "Enter empID";
+            return false;
+        }
+        fnameerr.innerHTML = '<i class="fas fa-check-circle"></i>';
+        return true;
+
+        }
+
+        function validateMName(){
+            var motherName = document.getElementById("motherName").value;
+        if(motherName.length == 0 ){
+            mnameerr.innerHTML = "Enter empID";
+            return false;
+        }
+        mnameerr.innerHTML = '<i class="fas fa-check-circle"></i>';
+        return true;
+        }
+
+        function validateMobile(){
+            var mobileNo = document.getElementById("mobileNo").value;
+            if(mobileNo.length == 0){
+                mobileNoerr.innerHTML = "Enter Mobile No.";
+                return false;
+            }
+            if(mobileNo.length !== 10){
+                mobileNoerr.innerHTML = "Enter valid 10 digit Mobile No.";
+                return false;
+            }
+            if(!mobileNo.match(/^[0-9{10}]+$/)){
+                mobileNoerr.innerHTML = "Invalid MobileNo";
+                return false;
+            }
+            mobileNoerr.innerHTML = '<i class="fas fa-check-circle"></i>';
+            return true;
+
+        }
+
+        function validateAadhar(){
+            var aadharNo = document.getElementById("aadharNo").value;
+            if(aadharNo.length == 0){
+                aadharNoerr.innerHTML = "Enter Aadhar No.";
+                return false;
+            }
+            
+            if(!aadharNo.match(/^[0-9{10}]+$/)){
+                aadharNoerr.innerHTML = "Invalid AadharNo";
+                return false
+            }
+            aadharNoerr.innerHTML = '<i class="fas fa-check-circle"></i>';
+            return true;
+
+
+        }
+
+        function validateGender(){
+            var gender = document.getElementById("gender").value;
+            if(gender.length == 0){
+                gendererr.innerHTML = "Enter gender";
+                return false;
+            }
+            
+            gendererr.innerHTML  = '<i class="fas fa-check-circle"></i>';
+            return true;
+        }
+
+        function validateAddress(){
+            var address = document.getElementById('address').value;
+            if(address.length == 0){
+                addresserr.innerHTML = "Enter address";
+                return false;
+            }
+            addresserr.innerHTML = '<i class="fas fa-check-circle"></i>';
+            return true;
+        }
+
+        function validateStandard(){
+            var standard = document.getElementById('standard').value;
+            if(standard.length == 0){
+                standarderr.innerHTML = "Enter address";
+                return false;
+            }
+            standarderr.innerHTML = '<i class="fas fa-check-circle"></i>';
+            return true;
+        }
+        var submit = document.getElementById("submit");
+
+   function validateSubmit(){
+    var id = validateStuid();
+    var name =validateName();
+    var fname = validateFName();
+    var mob = validateMobile();
+    var mname = validateMName();
+    var add = validateAddress();
+    var std = validateStandard();
+    var gen = validateGender();
+    var ano =validateAadhar();
+   
+        if(Boolean(id) && Boolean(name) && Boolean(fname) && Boolean(mname) && Boolean(mob) && Boolean(add) && Boolean(std) && Boolean(gen) && Boolean(ano)){
+        return true;
+         }
+         else{
+        alert("Please Enter all fields");
+        return false;
+    }
+
+   }
+
+
+
+
+
+    </script>
 </body>
+
 </html>

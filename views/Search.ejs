@@ -10,10 +10,17 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     
 </head>
+<style>
+a{
+  color:blue;
+  text-decoration: none;
+  
+}
+</style>
 <body>
-    <div class="container mt-5"> 
-      <h1>Student Details
-  </h1>
+    <h4 style="text-align: right;"><a href="http://localhost:4000/home">back</a></h4>
+   <div class="container mt-5"> 
+      <h1>Student Details</h1>
       <div class="input-group rounded ">
         <form action="/student/searchByName" method="get">
         <input type="text" name="Name" class="form-control"id="searchData" placeholder="searchByName" onkeypress="sendData(this)" />

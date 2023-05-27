@@ -110,18 +110,19 @@ route.post('/login',async(req,res)=>{
                     {loginstatus:true},
                     {new:true})
                 .exec();
-                res.render("home",{success:"LogIn Successfully "});
+               res.render("home",{success:"Success!!!LogIn Successfully "});
+               //res.status(200).json({result:userdetails.jwttoken})
             }
             else{
-                res.render("message",{success:"password doesnot match"});
+                res.render("message",{success:"Error!!!  Password doesnot match"});
                 
             }
         }
         else{
-            res.render("message",{success:"Usernot found"});}
+            res.render("message",{success:"Error!!!  Usernot found"});}
     }
     else{
-        res.render("message",{success:"Enter Email Id"});
+        res.render("message",{success:"Error!!!    Enter Email Id"});
     }
 });
 route.post("/resetlink",async(req,res)=>{

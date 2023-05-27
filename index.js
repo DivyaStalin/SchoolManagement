@@ -30,7 +30,7 @@ app.get('/teacher',(req,res)=>{
 });
 
 app.get('/studentregistration',(req,res)=>{
-    res.render('studentregistration.ejs');
+    res.render('studentregistration.ejs',{result});
 });
 
 app.get('/search',(req,res)=>{
@@ -77,6 +77,14 @@ app.get('/availableTeacher',(req,res)=>{
 
 app.get('/mail-form',(req,res)=>{
     res.render('mail-form.ejs',{title:"",result});
+});
+
+app.get('/teacherStatus',(req,res)=>{
+    res.render('teacherStatus.ejs',{result});
+});
+
+app.get('/teacherAtt',(req,res)=>{
+    res.render('teacherAtt.ejs',{result});
 });
 
 

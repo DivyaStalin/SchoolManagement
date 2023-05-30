@@ -129,7 +129,7 @@ div.content {
                 <ul class="navbar-nav ms-auto">
                         
                     <li class="nav-item">
-                        <a  class="nav-link" href = "http://localhost:4000/homepage">Logout</a>
+                        <a  class="nav-link" href = "http://localhost:4000/teacher/logout">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -143,9 +143,6 @@ div.content {
             <div class="sidebar">
                 <img src="/img1.jpg" /><br><br>
                 <a  href="http://localhost:4000/student/getallstudent">Student Information</a>
-                <a href="http://localhost:4000/teacher/searchTea">Teacher Information</a>
-                <a href="http://localhost:4000/teacher/send-mail">Announcement</a><br>
-                <a href="http://localhost:4000/teacher/availableTeacher?onPeriod=off">Available Teacher</a><br/>
                 <a href="http://localhost:4000/student/attendance">Attendance</a><br/>
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" >
@@ -166,29 +163,14 @@ div.content {
                 </div>
               </div>
             </div>
-            
-    
-            <div class="col-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="/img2.png" alt="Card image cap"style="border-radius: 50%">
-                    <div class="card-body">
-                      <h5 class="card-title">Add Teacher's Details</h5>
-                      
-                      <a href="/teacher" class="btn btn-primary">Click</a>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-3 offset-1">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top " src="/img3.jpg"  alt="Card image cap" style="border-radius: 50%;">
-                    <div class="card-body">
-                      <h5 class="card-title">Add Student's details</h5>
-                      
-                      <a href="/checkStudentTotal" class="btn btn-primary">Click</a>
-                    </div>
-                  </div>
-            </div>
-          </div>
-      </div>
-    </body>
+            <div class="col-4" style="text-align: right;">
+                  <form action="/teacher/teacherLogout" method="post">
+                  <h5 class="card-title">Teacher's Login</h5>
+                  <input type="text" class="form-control" name="firstName" placeholder="Enter Name"/><br/>
+                  <button type="submit" class="btn btn-primary">LogOUT</button>
+                </form>
+            </div>  
+        </div>
+    </div>
+</body>
 </html>

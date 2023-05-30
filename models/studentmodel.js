@@ -44,6 +44,7 @@ const studentSchema = new Schema({
         type:String,
         required:false  
     }
+    
 },
     {
         timestamps:true,
@@ -59,5 +60,4 @@ studentSchema.pre("save",function(next){
 
 
 const Student = mongoose.model("student",studentSchema);
-
 module.exports = Student;

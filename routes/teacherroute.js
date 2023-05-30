@@ -1,17 +1,19 @@
 const teacherSchema = require("../models/teachermodel");
+
 const { Router } = require('express');
 const { mailsending } = require('../middleware/mailer');
 const router = require('express').Router();
-const {isAdmin} = require('../middleware/auth')
+const {isAdmin} = require('../middleware/auth');
 const nodemailer = require('nodemailer');
+
 
 router.post('/teacherLogin',async(req,res)=>{
     let firstName = req.body.firstName;
     let result = await teacherSchema.find({firstName:firstName}).exec();
     if(result)
     {
-    await teacherSchema.findOneAndUpdate({firstName:firstName},{onperiod:'on'},{new:true})
-    res.render('message',{success:`${firstName} login success!!!!`})
+    await teacherSchema.findOneAndUpdate({firstName:firstName},{onPeriod:'on'},{new:true})
+    res.render('teacherHome')
     }else{
         res.status(400).json({result:'failed'});
     }
@@ -21,8 +23,8 @@ router.post('/teacherLogout',async(req,res)=>{
     let result = await teacherSchema.find({firstName:firstName}).exec();
     if(result)
     {
-    await teacherSchema.findOneAndUpdate({firstName:firstName},{onperiod:'off'},{new:true})
-    res.render('message',{success:`${firstName} logout success!!!!`})
+    await teacherSchema.findOneAndUpdate({firstName:firstName},{onPeriod:'off'},{new:true})
+    res.render('homepage')
     }else{
         res.status(400).json({result:'failed'});
     }

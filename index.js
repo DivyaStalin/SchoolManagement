@@ -34,7 +34,7 @@ app.get('/studentregistration',(req,res)=>{
 });
 
 app.get('/search',(req,res)=>{
-    res.render('search.ejs',{result});
+    res.render('search.ejs',{result,count});
 })
 
 app.get('/timetable',(req,res)=>{
@@ -68,7 +68,7 @@ app.get('/checkStudentTotal',(req,res)=>{
     res.render('checkStudentTotal.ejs');
 })
 app.get('/attendance',(req,res)=>{
-    res.render('attendance.ejs',{result});
+    res.render('attendance.ejs',{result,count,precount,abscount});
 })
 
 app.get('/availableTeacher',(req,res)=>{
@@ -85,6 +85,10 @@ app.get('/teacherStatus',(req,res)=>{
 
 app.get('/teacherAtt',(req,res)=>{
     res.render('teacherAtt.ejs',{result});
+});
+
+app.get('/teacherHome',(req,res)=>{
+    res.render('teacherHome.ejs');
 });
 
 

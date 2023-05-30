@@ -2,6 +2,64 @@ const studentSchema = require("../models/studentmodel");
 const { Router } = require('express');
 const express = require('express');
 const sturouter = require('express').Router();
+const attendanceSchema = require('../models/attendancemodel')
+
+sturouter.get('/att',async(req,res)=>{
+    try{
+           console.log(req.body);
+          const stuatt = new attendanceSchema({
+            month : req.query.month,
+            date :req.query.date,
+            attendance : req.body.attendance,
+            stuID : req.query.stuID
+          }
+            );
+          const result = await stuatt.save();
+          if(result){
+            res.status(200).json({result:result});
+            console.log('success',result);
+          }else{
+            res.status(400).json({result:'failed'});
+            console.log('failed');
+          }
+        
+    }catch(err){
+         console.log("Error",err);
+    }
+});
+
+sturouter.get('/pre',async(req,res)=>{
+    try{
+        let stuID = req.query.stuID;
+        const present = await attendanceSchema.findOne({stuID:stuID}).exec();
+        if(present){
+            const result = await attendanceSchema.findOneAndUpdate({stuID:stuID},{attendance:'present'},{new:true});
+            res.status(200).json({result:"success"})
+        }else{
+            res.status(400).json({result:'failed'});
+        }
+
+    }catch(err){
+        console.log('Error',err);
+    }
+})
+
+sturouter.get('/abs',async(req,res)=>{
+    try{
+        let stuID = req.query.stuID;
+        const present = await attendanceSchema.findOne({stuID:stuID}).exec();
+        if(present){
+            const result = await attendanceSchema.findOneAndUpdate({stuID:stuID},{attendance:'absent'},{new:true});
+            res.status(200).json({result:"success"})
+        }else{
+            res.status(400).json({result:'failed'});
+        }
+
+    }catch(err){
+        console.log('Error',err);
+    }
+})
+
 sturouter.get("/check",async(req,res)=>{
     try{
         let standard = req.query.standard;
@@ -56,7 +114,9 @@ sturouter.post("/studentregister",async (req,res)=>{
 sturouter.get('/getallstudent', async(req,res)=>{
     try{
         let result = await studentSchema.find().exec();
-        res.render("search",{result});
+        let count = await studentSchema.find().count();
+        res.render("search",{result,count});
+        
         
     }
         catch(err){
@@ -66,8 +126,10 @@ sturouter.get('/getallstudent', async(req,res)=>{
 
 sturouter.get('/searchByName', async(req,res)=>{
     try{
-        let result = await studentSchema.find({Name:{$regex:`^${req.query.Name}`,$options:'i'}})
-        res.render("search",{result});
+        let result = await studentSchema.find({Name:{$regex:`^${req.query.Name}`,$options:'i'}});
+        let count = await studentSchema.find({Name:{$regex:`^${req.query.Name}`,$options:'i'}}).count();
+        res.render("search",{result,count});
+        console.log(count);
     }catch(err){
       console.log("err");
     }
@@ -78,7 +140,11 @@ sturouter.get('/searchByStandard', async(req,res)=>{
             standard:{$regex:`^${req.query.standard}`,$options:'i'},
             }]
     });
-    res.render("search",{result});
+    let count = await studentSchema.find({$or:[{
+        standard:{$regex:`^${req.query.standard}`,$options:'i'},
+        }]
+}).count();
+    res.render("search",{result,count});
         }catch(err){
         res.status(400).json({status:false,message:err.message});
       console.log(err.message);
@@ -153,8 +219,14 @@ sturouter.get("/attendance",async(req,res)=>{
         let result = await studentSchema.find({$or:[{
             standard:{$regex:`^${req.query.standard}`,$options:'i'},
             }]
-    });
-        res.render("attendance",{result});
+        });
+        let count = await studentSchema.find({$or:[{
+            standard:{$regex:`^${req.query.standard}`,$options:'i'},
+            }]
+        }).count();
+        let precount = await attendanceSchema.find({attendance:'present'}).count();
+        let abscount = await attendanceSchema.find({attendance:'absent'}).count();
+        res.render("attendance",{result,count,precount,abscount});
         
     }
         catch(err){

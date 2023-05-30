@@ -47,8 +47,9 @@
                 <td><%= e.stuID %></td>
                 <td><%= e.Name %></td>
                 <td>
-                  <button type="button" class="btn btn-info" id="present" onclick="present() " >P</button>
-                  <button  class="btn btn-danger" id="absent" onclick="absent()">A</button>
+                  <button type="button" class="btn btn-info" ><a href="http://localhost:4000/student/att?stuID=<%=e._id%>&month=may&date=31/05">Add</a></button>
+                  <button  class="btn btn-success" ><a href="http://localhost:4000/student/pre?stuID=<%=e._id%>">P</a></button>
+                  <button  class="btn btn-danger" ><a href="http://localhost:4000/student/abs?stuID=<%=e._id%>">A</a></button>
               </td>
               </tr>
             <% }) %>
@@ -59,33 +60,9 @@
           </tbody>
       </table>
     </div> 
-    <h3 style="color:brown">Total No. of Students= <input value="<%-result.length%>" id="val" style="border: none;" /><br>
-    Present:<span id = "pre"></span><br/>
-    Absent:<span id="abs"></span></h3>
-    <script>
-
-        
-        let pre = 0;
-        let abs = 0;
-        
-        let n = document.getElementById("val").value;
-        
-        function present(){
-
-            pre+=1;
-            
-            document.getElementById("pre").innerHTML=pre;
-            console.log("present",pre);
-            
-        }   
-
-        function absent(){
-            abs+=1;
-            console.log("absent",abs);
-            
-            document.getElementById("abs").innerHTML=abs;   
-        }
-        
-    </script> 
+    <h3 style="color:brown">Total No. of Students:<%=count%> <br>
+    Present:<span><%=precount%></span><br/>
+    Absent:<span><%=abscount%></span></h3>
+     
 </body>
 </html>

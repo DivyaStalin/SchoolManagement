@@ -4,29 +4,58 @@ const express = require('express');
 const sturouter = require('express').Router();
 const attendanceSchema = require('../models/attendancemodel')
 
-sturouter.get('/att',async(req,res)=>{
+sturouter.post('/att',async(req,res)=>{
     try{
            console.log(req.body);
-          const stuatt = new attendanceSchema({
-            month : req.query.month,
-            date :req.query.date,
+          
+          const standard = await studentSchema.find({standard:req.body.standard}).exec();
+          if(standard){
+            standard.forEach(async(element) => {
+                console.log("standard",element);
+                var  stuatt = new attendanceSchema({
+            month : req.body.month,
+            date :req.body.date,
+            stuID:element._id,
             attendance : req.body.attendance,
-            stuID : req.query.stuID
           }
+          
             );
-          const result = await stuatt.save();
-          if(result){
-            res.status(200).json({result:result});
+
+            const result = await stuatt.save();
+                if(result){
+                    res.render('message',{success:'Success'})
+            //res.status(200).json({result:result});
             console.log('success',result);
           }else{
-            res.status(400).json({result:'failed'});
+            //res.status(400).json({result:'failed'});
             console.log('failed');
           }
+
+            });
+            
+          
+        }else{
+            res.status(400).json({result:'std failed'})
+        }
         
     }catch(err){
          console.log("Error",err);
     }
 });
+
+sturouter.get("/class",async(req,res)=>{
+    try{
+    const result=await studentSchema.find().populate('attendance');
+    if(result){
+        res.status(200).json({result:result});
+    }else{
+        res.status(400).json({result:'failed'});
+    }
+}catch(err){
+    console.log("error",err);
+}
+})
+
 
 sturouter.get('/pre',async(req,res)=>{
     try{
@@ -224,9 +253,11 @@ sturouter.get("/attendance",async(req,res)=>{
             standard:{$regex:`^${req.query.standard}`,$options:'i'},
             }]
         }).count();
+        
         let precount = await attendanceSchema.find({attendance:'present'}).count();
         let abscount = await attendanceSchema.find({attendance:'absent'}).count();
         res.render("attendance",{result,count,precount,abscount});
+
         
     }
         catch(err){

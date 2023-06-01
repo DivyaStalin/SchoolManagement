@@ -71,6 +71,11 @@ app.get('/attendance',(req,res)=>{
     res.render('attendance.ejs',{result,count,precount,abscount});
 })
 
+app.get('/att',(req,res)=>{
+    res.render('att.ejs');
+})
+
+
 app.get('/availableTeacher',(req,res)=>{
     res.render('availableTeacher.ejs',{result});
 })

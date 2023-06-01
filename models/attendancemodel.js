@@ -3,6 +3,8 @@ const Schema = mongoose.Schema;
 const crypto = require('crypto');
 
 
+
+
 const attendanceSchema = new Schema({
     uuid:{type:String,required:false},
     
@@ -12,14 +14,18 @@ const attendanceSchema = new Schema({
         required:false,
         default:'absent'
     },
+
     stuID:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'student'
+        
     },
+
     date:{
         type:String,
         required:true
     },
+    
     month:{
         type:String,
         required:true

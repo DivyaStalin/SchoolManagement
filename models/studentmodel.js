@@ -43,7 +43,7 @@ const studentSchema = new Schema({
     gender:{
         type:String,
         required:false  
-    }
+    },
     
 },
     {

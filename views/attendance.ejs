@@ -47,7 +47,7 @@
                 <td><%= e.stuID %></td>
                 <td><%= e.Name %></td>
                 <td>
-                  <button type="button" class="btn btn-info" ><a href="http://localhost:4000/student/att?stuID=<%=e._id%>&month=may&date=31/05">Add</a></button>
+                  
                   <button  class="btn btn-success" ><a href="http://localhost:4000/student/pre?stuID=<%=e._id%>">P</a></button>
                   <button  class="btn btn-danger" ><a href="http://localhost:4000/student/abs?stuID=<%=e._id%>">A</a></button>
               </td>
@@ -60,9 +60,11 @@
           </tbody>
       </table>
     </div> 
-    <h3 style="color:brown">Total No. of Students:<%=count%> <br>
+    <hr>
+    <h5 style="color:brown ;text-align: center;">
+    Total no.of Students:<%=count%><br/>  
     Present:<span><%=precount%></span><br/>
-    Absent:<span><%=abscount%></span></h3>
+    Absent:<span><%=abscount%></span></h5>
      
 </body>
 </html>

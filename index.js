@@ -68,7 +68,7 @@ app.get('/checkStudentTotal',(req,res)=>{
     res.render('checkStudentTotal.ejs');
 })
 app.get('/attendance',(req,res)=>{
-    res.render('attendance.ejs',{result,count,precount,abscount});
+    res.render('attendance.ejs',{result,count});
 })
 
 app.get('/att',(req,res)=>{

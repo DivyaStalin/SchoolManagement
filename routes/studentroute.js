@@ -8,46 +8,45 @@ sturouter.post('/att',async(req,res)=>{
     try{
            console.log(req.body);
           
-          const standard = await studentSchema.find({standard:req.body.standard}).exec();
-          if(standard){
-            standard.forEach(async(element) => {
-                console.log("standard",element);
+           const result = await studentSchema.find({standard:req.body.standard}).exec();
+          if(result){
+            result.forEach(async(element) => {
+                console.log("standard Success");
                 var  stuatt = new attendanceSchema({
-            month : req.body.month,
-            date :req.body.date,
-            stuID:element._id,
-            attendance : req.body.attendance,
-          }
-          
+                          
+                           date :new Date(),
+                           //status : req.body.status
+            
+                    student:{stuName:element.Name,
+                    stuID:element._id},
+                }
             );
-
             const result = await stuatt.save();
-                if(result){
-                    res.render('message',{success:'Success'})
-            //res.status(200).json({result:result});
-            console.log('success',result);
+           if(result){
+                    
+                    //res.render('message',{success:'Success'})
+            res.status(200).json({result:result});
+            console.log('Attendance success');
           }else{
             //res.status(400).json({result:'failed'});
             console.log('failed');
           }
-
-            });
-            
-          
+        });   
         }else{
             res.status(400).json({result:'std failed'})
         }
-        
-    }catch(err){
+    }
+    catch(err){
          console.log("Error",err);
     }
 });
 
 sturouter.get("/class",async(req,res)=>{
     try{
-    const result=await studentSchema.find().populate('attendance');
-    if(result){
-        res.status(200).json({result:result});
+    const result=await attendanceSchema.find().exec();
+   if(result){
+        //res.render("attendance",{result,count});
+        //res.status(200).json({result:result});
     }else{
         res.status(400).json({result:'failed'});
     }
@@ -59,10 +58,10 @@ sturouter.get("/class",async(req,res)=>{
 
 sturouter.get('/pre',async(req,res)=>{
     try{
-        let stuID = req.query.stuID;
-        const present = await attendanceSchema.findOne({stuID:stuID}).exec();
+        let _id = req.query._id;
+        const present = await attendanceSchema.findOne({_id:_id}).exec();
         if(present){
-            const result = await attendanceSchema.findOneAndUpdate({stuID:stuID},{attendance:'present'},{new:true});
+            const result = await attendanceSchema.findOneAndUpdate({_id:_id},{status:'present'},{new:true});
             res.status(200).json({result:"success"})
         }else{
             res.status(400).json({result:'failed'});
@@ -73,7 +72,7 @@ sturouter.get('/pre',async(req,res)=>{
     }
 })
 
-sturouter.get('/abs',async(req,res)=>{
+/*sturouter.get('/abs',async(req,res)=>{
     try{
         let stuID = req.query.stuID;
         const present = await attendanceSchema.findOne({stuID:stuID}).exec();
@@ -87,7 +86,7 @@ sturouter.get('/abs',async(req,res)=>{
     }catch(err){
         console.log('Error',err);
     }
-})
+})*/
 
 sturouter.get("/check",async(req,res)=>{
     try{
@@ -254,9 +253,9 @@ sturouter.get("/attendance",async(req,res)=>{
             }]
         }).count();
         
-        let precount = await attendanceSchema.find({attendance:'present'}).count();
-        let abscount = await attendanceSchema.find({attendance:'absent'}).count();
-        res.render("attendance",{result,count,precount,abscount});
+        /*let precount = await attendanceSchema.find({attendance:'present'}).count();
+        let abscount = await attendanceSchema.find({attendance:'absent'}).count();*/
+        res.render("attendance",{result,count});
 
         
     }

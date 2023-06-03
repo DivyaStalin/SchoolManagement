@@ -20,27 +20,23 @@
     <div class="container mt-5"> 
       <h1>Student attendence
   </h1>
-
-  <div class="input-group rounded ">
-    <form action="/student/attendance" method="get">
-   <input type="text" class="form-control rounded " name="standard" id="searchData" placeholder="searchByStandard" onkeyup="sendData(this)" />
- </form>
- 
+  <center><form action="/student/att" method="post">
+    <h4>Today's Attendance</h4>
+     <input type="text" class="form-control" placeholder="Enter standard" name="standard"/><br/>
+    
+    <h5 style="color:brown ;text-align: center;">
+          
 </div>
-      
-  <br>
-  
-    <br>
+      <br><br>
     <table class="table table-bordered">
         <thead class="table-dark">
           <tr>
-            <th scope="col">Student ID</th>
+            <th scope ="col">StuID</th>
             <th scope="col">Name</th>
             <th scope="col">Present/Absent</th>
-         
           </tr>
         </thead>
-        <tbody >
+        <tbody>
           <%if(result.length > 0) { %>
             <% result.forEach(function(e)  {%>
               <tr>
@@ -48,8 +44,10 @@
                 <td><%= e.Name %></td>
                 <td>
                   
-                  <button  class="btn btn-success" ><a href="http://localhost:4000/student/pre?stuID=<%=e._id%>">P</a></button>
-                  <button  class="btn btn-danger" ><a href="http://localhost:4000/student/abs?stuID=<%=e._id%>">A</a></button>
+                    <input type = "text" name="status" />
+                    
+
+                  </form>
               </td>
               </tr>
             <% }) %>
@@ -57,14 +55,16 @@
           <% } %> 
 
           
-          </tbody>
+        </tbody>  
+          
       </table>
     </div> 
     <hr>
-    <h5 style="color:brown ;text-align: center;">
-    Total no.of Students:<%=count%><br/>  
-    Present:<span><%=precount%></span><br/>
-    Absent:<span><%=abscount%></span></h5>
-     
+    <div class="text-center mt-3">
+      <button type="submit" class="btn btn-primary btn-rounded w-75">Click</button>
+   </div>
+ </form></center>
+
+    
 </body>
 </html>

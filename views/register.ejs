@@ -57,8 +57,19 @@
             <div class="col-4">
                 <input type="email" class="form-control" id="email" placeholder="Enter emailId" name="email" 
                 onkeyup="validateEmail()"/>
-                <span id = "emailerr"></span>
+                <span id = "emailerr"></span>  
             </div>
+            <div class="col-4">
+                <input type="password" class="form-control" placeholder="Enter your password" id="pword" name="password"
+                onkeyup="validatePassword()"/>
+                    <span id="passwordErr"></span>
+            </div>
+            <div class="col-4">
+                <input type="password" class="form-control" placeholder="Enter your confirm password" id="cpword" name="confirmPassword"
+                onkeyup="validateCPassword()"/>
+                    <span id="cpasswordErr"></span></span>
+            </div>
+            
             <div class="col-4">
                 <input type="text" class="form-control" id="mobileNo" placeholder="Enter MobileNo" name="mobileNo"
                 onkeyup="validateMobile()"/>
@@ -104,6 +115,8 @@
     var qualificationerr = document.getElementById("qualificationerr");
     var subjecterr = document.getElementById("subjecterr");
     var salaryerr = document.getElementById("salaryerr");
+    var passwordErr = document.getElementById("passwordErr");
+    var cpasswordErr = document.getElementById("cpasswordErr");
 
     function validateEmpid(){
         var empID = document.getElementById("empID").value;
@@ -138,7 +151,7 @@
                 emailerr.innerHTML = "Enter Email";
                 return false;
             }
-            if(!email.match(/^[a-z]+[@]+[a-z]+[.com]+$/)){
+            if(!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+[@]+[a-z]+[.com]+$/)){
                 emailerr.innerHTML = "Invalid Email";
                 return false;
             }
@@ -208,6 +221,35 @@
         return true;
 
     }
+    function validatePassword(){
+            var password = document.getElementById("pword").value;
+            if(password.length == 0){
+                passwordErr.innerHTML = "Enter Password.";
+                return false;
+            }
+            if(password.length !== 6){
+                passwordErr.innerHTML = "Enter 6 digits.";
+                return false;
+            }
+            passwordErr.innerHTML = '<i class="fas fa-check-circle"></i>';
+           
+            return true;
+        }
+        function validateCPassword(){
+            var cpassword = document.getElementById("cpword").value;
+            var password = document.getElementById("pword").value;
+            if(cpassword.length == 0){
+                cpasswordErr.innerHTML = "Enter Password.";
+                return false;
+            }
+            if(cpassword !== password){
+                cpasswordErr.innerHTML = "Invalid Confirm Password.";
+                return false;
+            }
+            cpasswordErr.innerHTML = '<i class="fas fa-check-circle"></i>';
+            
+            return true;
+        }
 var submit = document.getElementById("submit");
    function validateSubmit(){
 
@@ -221,8 +263,11 @@ var submit = document.getElementById("submit");
     var sub = validateSubject();
     var sal = validateSalary();
     var ano =validateAadhar();
+    var pwd = validatePassword();
+    var cpwd = validateCPassword();
+
    
-    if(Boolean(id) && Boolean(fn) && Boolean(ln) && Boolean(mn) && Boolean(eid) && Boolean(qua) && Boolean(sub) && Boolean(sal) && Boolean(ano)){
+    if(Boolean(id) && Boolean(fn) && Boolean(ln) && Boolean(mn) && Boolean(eid) && Boolean(qua) && Boolean(sub) && Boolean(sal) && Boolean(ano) && Boolean(pwd) && Boolean(cpwd)){
         return true;
     }else{
         alert("Please Enter all fields");
@@ -230,13 +275,5 @@ var submit = document.getElementById("submit");
     }
 
    }
-
-
-
-
-
-
-
-
 </script>
 </html>

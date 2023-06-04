@@ -16,6 +16,21 @@
     .btn-rounded{
         border-radius: 30px;
     }
+    span{
+        font-size: 15px;
+        color: red;
+        margin-top: 20px;
+        margin-left: 50px;
+        font-weight: bold;
+    }
+    .fas{
+        color: green;
+    }
+    form{
+        font-family: sans-serif;
+        font-weight: bold;
+    }
+
 </style>
 </head>
 <body class="bg-color">
@@ -27,57 +42,66 @@
                 </div>
                 <div class="mb-3">
                     <label for="userName" class="form-label">UserName</label>
-                    <input type="text" class="form-control" id="email" name="userName">
+                    <input type="text" class="form-control" id="userName" name="userName" onkeyup="validateUsername()"/>
+                    <span id = "userNameerr"></span>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email">
+                    <input type="email" class="form-control" id="email" name="email" onkeyup="validateEmail()"/>
+                    <span id = "emailerr"></span>  
                 </div>
                 <div class="mb-3">
-                    <label for="userName" class="form-label">MobileNo</label>
-                    <input type="text" class="form-control" id="email" name="mobileNo">
+                    <label for="mobileNo" class="form-label">MobileNo</label>
+                    <input type="text" class="form-control" id="mobileNo" name="mobileNo" onkeyup="validateMobile()"/>
+                    <span id = "mobileNoerr"></span>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <input type="password" class="form-control" id="pword" name="password" onkeyup="validatePassword()"/>
+                    <span id="passwordErr"></span></span>
                 </div>
                 <div class="mb-3">
                     <label for="confirm_password" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirm_password" name="cpassword">
+                    <input type="password" class="form-control" id="cpword" name="cpassword" onkeyup="validateCPassword()"/>
+                    <span id="cpasswordErr"></span>
                 </div>
                 <div class="mb-3">
                     <label for="dob" class="form-label">Date of Birth</label>
-                    <input type="text" class="form-control" id="email" name="dob">
+                    <input type="text" class="form-control" id="dob" name="dob" onkeyup="validateDOB()"/>
+                    <span id="dobErr"></span> 
                 </div>
                 <div>
                 <label for="dob" class="form-label">Gender</label>
                 <span class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" value="male" name="gender"onclick="validateGender(this)" id="male">
+                    <label class="form-check-label" for="male">
                       male
                     </label>
                 </span>
                   <span class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2">
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" value="female" name="gender" onclick="validateGender(this)" id="female">
+                    <label class="form-check-label" for="female">
                       female
                     </label>
                   </span>
+                  <div id="gendererr"></div>
                 </div>  
                 <div class="mb-3">
                     <label for="country" class="form-label">Country</label>
-                    <input type="text" class="form-control" id="email" name="country">
+                    <input type="text" class="form-control" id="country" name="country" onkeyup="validateCountry()"/>
+                    <span id = "countryerr"></span>
                 </div>
                 <div class="mb-3">
                     <label for="state" class="form-label">State</label>
-                    <input type="text" class="form-control" id="email" name="state">
+                    <input type="text" class="form-control" id="state" name="state" onkeyup="validateState()"/>
+                    <span id="stateerr"></span>
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="terms">
                     <label class="form-check-label" for="terms">I agree terms and conditions.</label>
                 </div>
                 <div class="text-center mt-3">
-                    <button type="submit" class="btn btn-primary btn-rounded w-75">Register Now</button>
+                    <button type="submit" class="btn btn-primary btn-rounded w-75" id="submit" onclick="validateSubmit()" >Register Now</button>
                 </div>
                 <div class="mb-3 text-center text-secondary mt-3">
                     or register using
@@ -91,5 +115,182 @@
         </div>
     </section>
 </body>
+<script>
+    
+    var userNameerr = document.getElementById("userNameerr");
+    var emailerr = document.getElementById("emailerr");
+    var mobileNoerr = document.getElementById("mobileNoerr");
+    var passwordErr = document.getElementById("passwordErr");
+    var cpasswordErr = document.getElementById("cpasswordErr");
+    var dobErr = document.getElementById("dobErr");
+    var countryerr =document.getElementById("countryerr");
+    var stateerr = document.getElementById("stateerr");
+    var gendererr = document.getElementById("gendererr")
 
+    function validateCountry(){
+        var country = document.getElementById("country").value;
+        if(country.length == 0 ){
+            countryerr.innerHTML = "Enter country";
+            return false;
+        }
+        countryerr.innerHTML = '<i class="fas fa-check-circle"></i>';
+        return true;
+    }
+    function validateState(){
+        var state = document.getElementById("state").value;
+        if(state.length == 0 ){
+            stateerr.innerHTML = "Enter country";
+            return false;
+        }
+        stateerr.innerHTML = '<i class="fas fa-check-circle"></i>';
+        return true;
+    }
+    function validateUsername(){
+        var userName = document.getElementById("userName").value;
+        if(userName.length == 0){
+            userNameerr.innerHTML = "Enter First name";
+            return false;
+        }
+        userNameerr.innerHTML = '<i class="fas fa-check-circle"></i>';
+        return true;
+    }
+    
+    function validateEmail(){
+        var email= document.getElementById("email").value;
+            if(email.length == 0){
+                emailerr.innerHTML = "Enter Email";
+                return false;
+            }
+            if(!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+[@]+[a-z]+[.com]+$/)){
+                emailerr.innerHTML = "Invalid Email";
+                return false;
+            }
+            emailerr.innerHTML = '<i class="fas fa-check-circle"></i>';
+            return true;
+    }
+    
+    function validateMobile(){
+        var mobileNo = document.getElementById("mobileNo").value;
+            if(mobileNo.length == 0){
+                mobileNoerr.innerHTML = "Enter Mobile No.";
+                return false;
+            }
+            if(mobileNo.length !== 10){
+                mobileNoerr.innerHTML = "Enter valid 10 digit Mobile No.";
+                return false;
+            }
+            if(!mobileNo.match(/^[0-9{10}]+$/)){
+                mobileNoerr.innerHTML = "Invalid MobileNo";
+                return false;
+            }
+            mobileNoerr.innerHTML = '<i class="fas fa-check-circle"></i>';
+            return true;
+
+    }
+    function validateDOB(){
+        var dob = document.getElementById("dob").value;
+            if(dob.length == 0){
+                dobErr.innerHTML = "Enter date of birth";
+                return false;
+            }
+            
+            if(!dob.match(/(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/)){
+                dobErr.innerHTML = "Invalid Date of birth Enter dd/mm/yyyy";
+                return false;
+            }
+            dobErr.innerHTML = '<i class="fas fa-check-circle"></i>';
+            return true;
+        }
+
+        function validateGender(gender){
+            
+            x=0
+            if(gender.checked) 
+           {
+            x++; 
+            gendererr.innerHTML='<i class="fas fa-check-circle"></i>';
+            return true;
+         }
+           if(x==0){ 
+            alert('Select Male or Female');
+             return false;
+           }  
+        }
+
+        /*function validsex(umsex,ufsex)
+       {
+         x=0;
+
+        if(male.checked) 
+      {
+        x++;
+       } if(female.checked)
+      {
+        x++; 
+       }
+      if(x==0)
+     {
+      alert('Select Male/Female');
+      return false;
+     }
+    }*/
+    
+    function validatePassword(){
+            var password = document.getElementById("pword").value;
+            if(password.length == 0){
+                passwordErr.innerHTML = "Enter Password.";
+                return false;
+            }
+            if(password.length !== 6){
+                passwordErr.innerHTML = "Enter 6 digits.";
+                return false;
+            }
+            passwordErr.innerHTML = '<i class="fas fa-check-circle"></i>';
+           
+            return true;
+        }
+        function validateCPassword(){
+            var cpassword = document.getElementById("cpword").value;
+            var password = document.getElementById("pword").value;
+            if(cpassword.length == 0){
+                cpasswordErr.innerHTML = "Enter Password.";
+                return false;
+            }
+            if(cpassword !== password){
+                cpasswordErr.innerHTML = "Invalid Confirm Password.";
+                return false;
+            }
+            cpasswordErr.innerHTML = '<i class="fas fa-check-circle"></i>';
+            
+            return true;
+        }
+var submit = document.getElementById("submit");
+   function validateSubmit(){
+    var fn =validateUsername();
+    var mn = validateMobile();
+    var eid = validateEmail();
+    var con = validateCountry();
+    var sta = validateState();
+    var pwd = validatePassword();
+    var cpwd = validateCPassword();
+    var gen = validateGender();
+
+   
+    if( Boolean(fn) && Boolean(mn) && Boolean(eid) && Boolean(con) && Boolean(sta)  && Boolean(pwd) && Boolean(cpwd)&& Boolean(gen)){
+        return true;
+    }else{
+        alert("Please Enter all fields");
+        return false;
+    }
+
+   }
+
+
+
+
+
+
+
+
+</script>
 </html>

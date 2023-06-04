@@ -73,7 +73,7 @@
                         <a class="nav-link" href = "#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href = "#">FEE Structure</a>
+                        <a class="nav-link" href = "#gallery">Gallery</a>
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link" href = "#contactus">Contact</a>
@@ -82,10 +82,10 @@
             </div>
         </nav>
     
-<div class="container-fluid"> 
+<div class="container-fluid" id="home"> 
     <div class="row mt-20">
-        <div class="col-8">
-            <img src="img1.jpg"/>
+        <div class="col-8 text-center">
+            <img src="img1.jpg" class="rounded"/>
             
             <div class="header">
                 
@@ -93,13 +93,15 @@
         </div>
     <div class="col-4">   
 <form action="/user/login" method="post" >
+    
     <i class="fas fa-user"></i>
     <h3>LogIn</h3>
 
 <input type="email" class="form-control" placeholder="Enter email" name="email"/><br/>
 <input type="password" class="form-control" placeholder="Enter password" name="password"/><br/>
 <div class="text-center mt-3">
-    <button type="submit" class="btn btn-primary btn-rounded w-75">LogIn</button>
+    <button type="submit" class="btn btn-primary ">Admin</button>
+    <button type="submit" class="btn btn-primary" formaction="/teacher/teacherLogin">User</button>
 </div>
 <br>
 <p>Forget Password?  <a href="http://localhost:4000/forgetpwdlink"><b>Click</b></a></p>
@@ -107,17 +109,64 @@
     <i class="fa-brands fa-facebook"></i><i class="fa-brands fa-google"></i><i class="fa-brands fa-twitter"></i><br/><br/>
 If new user? <a href="/login"><i>Register now</i></a></b>
 </form>
-        <div>
-          
-          <form action="/teacher/teacherLogin" method="post">
-            <h5 class="card-title">Teacher's Login</h5>
-            <input type="text" class="form-control" name="firstName" placeholder="Enter Name"/><br/>
-            <button type="submit" class="btn btn-primary">LogIN</button>
-            
-          </form>
-        </div>    
+           
     </div>
 </div> 
+<hr/>
 
+<section id="about">
+    <h1>About our School</h1>
+    
+        <div class="row p-0">
+            <div class="col-8">
+                <img src="/schoolimg1.png" style="width:90%;margin: 0%;margin-left: 0%;margin-right: 0%;padding: 0%;" />
+            </div>
+            <div class="col-4">
+                <h1>Vidyaa Vikas International School (CBSE)</h1><br/>
+                <h5>
+                    Vidyaa Vikas Educational and Charitable Trust was established in September 12, 1996 with the Motto “End of Education is Perfection in Humanity”
+                </h5><br/>
+                <p><u>Our school provides a child-centered philosophy that promotes creative thinking and lifelong learning. Our educators are dedicated to inspiring children to achieve the very highest standards in all their endeavors as they progress their educational journey with us.</u>
+                </p>
+
+            </div>
+        </div>
+    </div>
+     
+    <hr/>    
+</section>
+<hr/>
+<section id="gallery">
+    <img src="dance.jpg" style="width:50%;margin: 0%;"/>
+    <img src="scl.jpg" style="width:40%;margin: 0%;"/>
+    <img src="stu.jpg" style="width:50%;margin: 0%;"/>
+</section>
+<hr/>
+<section id="contactus">
+    <div class="container col-6">
+        <h4>Contact Us.</h4>
+        <form class="p-5 m-0">
+          <label for="fname">First Name</label>
+          <input type="text" class="form-control" placeholder="Your name.."><br/>
+      
+          <label for="lname">Last Name</label>
+          <input type="text" class="form-control" placeholder="Your last name.."><br/>
+      
+          <label for="country">Country</label>
+          <select id="country" class="form-control">
+            <option value="australia">Australia</option>
+            <option value="canada">Canada</option>
+            <option value="usa">USA</option>
+          </select><br/>
+      
+          <label for="subject">Subject</label>
+          <textarea class="form-control" placeholder="Write something.." style="height:200px"></textarea>
+          <br/>
+      
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      
+</section>
 </body>
 </html>

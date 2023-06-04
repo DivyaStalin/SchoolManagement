@@ -143,34 +143,22 @@ div.content {
             <div class="sidebar">
                 <img src="/img1.jpg" /><br><br>
                 <a  href="http://localhost:4000/student/getallstudent">Student Information</a>
-                <a href="http://localhost:4000/student/attendance">Attendance</a><br/>
+                <a href="http://localhost:4000/student/att">Attendance</a><br/>
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" >
                     TimeTable
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="http://localhost:4000/user/timeTable?standard=1">Class 1</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:4000/user/timeTable?standard=2">Class 2</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:4000/user/timeTable?standard=3">Class 3</a></li>
                     <li><a class="dropdown-item" href="http://localhost:4000/user/timeTable?standard=4">Class 4</a></li>
                     <li><a class="dropdown-item" href="http://localhost:4000/user/timeTable?standard=5">Class 5</a></li>
                     <li><a class="dropdown-item" href="http://localhost:4000/user/timeTable?standard=6">Class 6</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:4000/user/timeTable?standard=7">Class 7</a></li>
                     <li><a class="dropdown-item" href="http://localhost:4000/user/timeTable?standard=8">Class 8</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:4000/user/timeTable?standard=9">Class 9</a></li>
-                    <li><a class="dropdown-item" href="http://localhost:4000/user/timeTable?standard=10">Class 10</a></li>
-                  </ul>
+                    </ul>
                 </div>
               </div>
             </div>
-            <div class="col-4" style="text-align: right;">
-                  <form action="/teacher/teacherLogout" method="post">
-                  <h5 class="card-title">Teacher's Login</h5>
-                  <input type="text" class="form-control" name="firstName" placeholder="Enter Name"/><br/>
-                  <button type="submit" class="btn btn-primary">LogOUT</button>
-                </form>
-            </div>  
-        </div>
+            </div>
     </div>
+    
 </body>
 </html>

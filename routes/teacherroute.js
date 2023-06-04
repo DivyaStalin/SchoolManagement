@@ -8,16 +8,29 @@ const nodemailer = require('nodemailer');
 
 
 router.post('/teacherLogin',async(req,res)=>{
-    let firstName = req.body.firstName;
-    let result = await teacherSchema.find({firstName:firstName}).exec();
-    if(result)
+try{
+    let email = req.body.email;
+    let password = req.body.password;
+    let user = await teacherSchema.find({email:email}).exec();
+    if(user)
     {
-    await teacherSchema.findOneAndUpdate({firstName:firstName},{onPeriod:'on'},{new:true})
-    res.render('teacherHome')
+        const result = await teacherSchema.find({password:password}).exec();
+        if(result){
+            await teacherSchema.findOneAndUpdate({email:email},{$set:{status:'active',onPeriod:'on'}},{new:true})
+           res.render('teacherHome');
+           //res.status(200).json({message:'success'});
+        }else{
+            res.status(400).json({message:"password doesn't match"});
+        }
     }else{
-        res.status(400).json({result:'failed'});
+        res.status(400).json({result:'Email ID Invalid'});
     }
-})
+
+
+}catch(err){
+    console.log(err);
+}
+    })
 router.post('/teacherLogout',async(req,res)=>{
     let firstName = req.body.firstName;
     let result = await teacherSchema.find({firstName:firstName}).exec();
@@ -173,7 +186,7 @@ router.get('/send-mail', async(req, res) =>{
 
 
 
-router.post("/teacherregister",async (req,res)=>{
+router.post("/teacherregister",isAdmin,async (req,res)=>{
     try{
     
      let empID = req.body.empID;
@@ -185,11 +198,14 @@ router.post("/teacherregister",async (req,res)=>{
      let qualification = req.body.qualification;
      let subject = req.body.subject;
      let salary = req.body.salary;
+     let password = req.body.password;
+     let confirmPassword = req.body.confirmPassword;
 
      const teacher =  teacherSchema(req.body);
         
         const result = await teacher.save();
         if(result){
+            
           res.render("message",{success:`Success!!! ${req.body.firstName} your details are registered`})
           //res.status(200).json({result:result})
         }

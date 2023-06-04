@@ -97,8 +97,10 @@
     <i class="fas fa-user"></i>
     <h3>LogIn</h3>
 
-<input type="email" class="form-control" placeholder="Enter email" name="email"/><br/>
-<input type="password" class="form-control" placeholder="Enter password" name="password"/><br/>
+<input type="email" class="form-control" placeholder="Enter email" id="email" name="email" onkeyup="validateEmail()"/><br/>
+<span id = "emailerr" style="color:red"></span>
+<input type="password" class="form-control" placeholder="Enter password" id="pword" name="password" onkeyup="validatePassword()"/><br/>
+<span id = "passerr" style="color:red"></span>
 <div class="text-center mt-3">
     <button type="submit" class="btn btn-primary ">Admin</button>
     <button type="submit" class="btn btn-primary" formaction="/teacher/teacherLogin">User</button>
@@ -168,5 +170,37 @@ If new user? <a href="/login"><i>Register now</i></a></b>
       </div>
       
 </section>
+<script>
+    var emailerr=document.getElementById('emailerr');
+    var passerr = document.getElementById('passerr');
+    function validateEmail() {
+        var email= document.getElementById("email").value;
+            if(email.length == 0){
+                emailerr.innerHTML = "Enter Email";
+                return false;
+            }
+            if(!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+[@]+[a-z]+[.com]+$/)){
+                emailerr.innerHTML = "Invalid Email";
+                return false;
+            }
+            emailerr.innerHTML = "";
+            return true;
+
+    }
+    function validatePassword() {
+        var password = document.getElementById("pword").value;
+            if(password.length == 0){
+                passerr.innerHTML = "Enter Password.";
+                return false;
+            }
+            if(password.length !== 6){
+                passerr.innerHTML = "Enter 6 digits.";
+                return false;
+            }
+            passerr.innerHTML = "";
+           return true;
+        
+    }
+</script>
 </body>
 </html>
